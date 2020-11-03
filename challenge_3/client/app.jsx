@@ -122,7 +122,7 @@ class ToggleForms extends React.Component {
               <li>{s.creditCardNo}, {s.expiryDate}, {s.CVV}, {s.billingZipCode} </li>
             </ul>
           </span>
-          <button className="next" name={this.props.checkoutStatus}>Next Step</button>
+          <button className="next" name={this.props.checkoutStatus}>{this.props.checkoutStatus === 'F4' ? 'Purchase' : 'Next Step'}</button>
         </form>
       </div>
     )
