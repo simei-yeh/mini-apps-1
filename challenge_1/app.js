@@ -99,20 +99,24 @@ document.getElementById("clear").addEventListener("click", function () {
 
 for (let i = 1; i <= 9; i++) {
   document.getElementById("box" + i).addEventListener("click", function () {
-    document.getElementById("box" + i).innerHTML = currentPlayer;
-    gamePieces++;
-    if (gamePieces >= 5 && checkWinCondition(currentPlayer)) {
-      alert(currentPlayer + ' wins! Reset game board.');
-      if (currentPlayer === 'X') {
-        Xwins++;
-        previousWinner = currentPlayer;
-      } else {
-        Owins++;
-        previousWinner = currentPlayer;
-      }
-
+    if (document.getElementById("box" + i).innerHTML !== '') {
+      alert('choose another tile! this one is already taken')
     } else {
-      togglePlayer(currentPlayer);
+      document.getElementById("box" + i).innerHTML = currentPlayer;
+      gamePieces++;
+      if (gamePieces >= 5 && checkWinCondition(currentPlayer)) {
+        alert(currentPlayer + ' wins! Reset game board.');
+        if (currentPlayer === 'X') {
+          Xwins++;
+          previousWinner = currentPlayer;
+        } else {
+          Owins++;
+          previousWinner = currentPlayer;
+        }
+
+      } else {
+        togglePlayer(currentPlayer);
+      }
     }
   })
 }
