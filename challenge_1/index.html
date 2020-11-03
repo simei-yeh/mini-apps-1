@@ -1,8 +1,49 @@
 <html>
 
+<head>Tic Tac Toe Game
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    position: absolute;
+    width: 200px;
+    height:200px;
+    margin:auto;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  </style>
+  </head>
 <body>
+  <button id="clear">Clear All Moves!</button>
+  <table>
+    <tr>
+      <th id="box1"></th>
+      <th id="box2"></th>
+      <th id="box3"></th>
+    </tr>
+    <tr>
+      <th id="box4"></th>
+      <th id="box5"></th>
+      <th id="box6"></th>
+    </tr>
+
+    <tr>
+      <th id="box7"></th>
+      <th id="box8"></th>
+      <th id="box9"></th>
+    </tr>
+  </table>
 
 </body>
 <script src="app.js"></script>
-</html>
 
+</html>
