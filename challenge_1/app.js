@@ -2,7 +2,8 @@
 //app detects win/tie and displays appropriate message
 //button resets the game
 
-var firstPlayer = "X";
+var firstPlayer = previousWinner || "X";
+var previousWinner = null;
 var currentPlayer = firstPlayer;
 var Xwins = 0;
 var Owins = 0;
@@ -86,10 +87,6 @@ var checkWinCondition = function (player) {
 }
 
 
-// checkWins(str, x.slice(i + 1), y.slice(j));
-// checkWins(str, x.slice(i), y.slice(j + 1));
-// checkWins(str, x.slice(i + 1), y.slice(j + 1));
-
 //clear all moves
 document.getElementById("clear").addEventListener("click", function () {
   for (let i = 1; i <= 9; i++) {
@@ -106,9 +103,17 @@ for (let i = 1; i <= 9; i++) {
     gamePieces++;
     if (gamePieces >= 5 && checkWinCondition(currentPlayer)) {
       alert(currentPlayer + ' wins! Reset game board.');
-      currentPlayer === 'X' ? Xwins++ : Owins++;
-    };
-    togglePlayer(currentPlayer);
+      if (currentPlayer === 'X') {
+        Xwins++;
+        previousWinner = currentPlayer;
+      } else {
+        Owins++;
+        previousWinner = currentPlayer;
+      }
+
+    } else {
+      togglePlayer(currentPlayer);
+    }
   })
 }
 

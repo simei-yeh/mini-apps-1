@@ -1,0 +1,30 @@
+{
+  "name": "challenge_4",
+  "version": "1.0.0",
+  "description": "connect four",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "html": "^1.0.0",
+    "jsx": "^0.9.89",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-react": "^7.12.1",
+    "babel-loader": "^8.1.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.2",
+    "node.js": "0.0.1-security",
+    "nodemon": "^2.0.6",
+    "sqlite": "^4.0.15",
+    "webpack": "^5.4.0"
+  }
+}
