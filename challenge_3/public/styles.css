@@ -1,0 +1,58 @@
+.next {
+  position: absolute;
+  margin-top: 300px;
+  margin-left: 500px;
+}
+
+
+.showMe {
+  visibility: visible;
+}
+
+.hideMe {
+  visibility: hidden;
+}
+
+.formBox1 {
+  position: absolute;
+  margin-top: 50px;
+  margin-left: 150px;
+  padding: 10px;
+}
+
+.formBox2 {
+  position: absolute;
+  margin-top: 75px;
+  margin-left: 150px;
+  padding: 10px;
+}
+
+.formBox3 {
+  position: absolute;
+  margin-top: 100px;
+  margin-left: 150px;
+  padding: 10px;
+}
+
+.formBox4 {
+  position: absolute;
+  margin-top:  125px;
+  margin-left: 150px;
+  padding: 10px;
+
+}
+
+.formBox5 {
+  position: absolute;
+  margin-top: 150px;
+  margin-left: 150px;
+  padding: 10px;
+}
+
+
+.submit {
+  position: absolute;
+  margin-top: 250px;
+  margin-left: 300px;
+  padding: 5px;
+}
