@@ -8,6 +8,7 @@ var currentPlayer = firstPlayer;
 var Xwins = 0;
 var Owins = 0;
 var gamePieces = 0;
+var winner = false;
 
 //toggle Players
 var togglePlayer = function (player) {
@@ -99,13 +100,14 @@ document.getElementById("clear").addEventListener("click", function () {
 
 for (let i = 1; i <= 9; i++) {
   document.getElementById("box" + i).addEventListener("click", function () {
-    if (document.getElementById("box" + i).innerHTML !== '') {
+    if (winner) {
+      alert(previousWinner + ' has already won! reset game board')
+    } else if (document.getElementById("box" + i).innerHTML !== '') {
       alert('choose another tile! this one is already taken')
     } else {
       document.getElementById("box" + i).innerHTML = currentPlayer;
       gamePieces++;
       if (gamePieces >= 5 && checkWinCondition(currentPlayer)) {
-        alert(currentPlayer + ' wins! Reset game board.');
         if (currentPlayer === 'X') {
           Xwins++;
           previousWinner = currentPlayer;
@@ -113,7 +115,8 @@ for (let i = 1; i <= 9; i++) {
           Owins++;
           previousWinner = currentPlayer;
         }
-
+        winner = true;
+        setTimeout(() => {alert(currentPlayer + ' wins! Reset game board.')}, 0);
       } else {
         togglePlayer(currentPlayer);
       }
@@ -126,6 +129,7 @@ for (let i = 1; i <= 9; i++) {
 document.getElementById("clear").addEventListener("click", function () {
   document.getElementById("winsCount").innerHTML =
     "X wins  " + Xwins + " and   O wins  " + Owins;
+  winner = false;
 })
 
 
