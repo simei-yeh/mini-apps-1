@@ -21,32 +21,74 @@ var togglePlayer = function (player) {
 //function to check if one player won 3 in a row
 var checkWinCondition = function (player) {
   let won = false;
-  let array = [1, 2, 3];
+  let offsets = [0, 3, 6];
+  let colRowCount = [1, 2, 3];
 
-  var checkWins = function (count, possArray) {
+  var checkWins = function (type, str, x, y) {
     //base case
-    if (count === 3) {
+    // console.log(str, player)
+    if (str === 'XXX' || str === 'OOO') {
       won = true;
+      return;
+    } else if (x.length <= 0 || y.length <= 0) {
       return;
     }
 
-    for (let i = 1; i < 4; i++) {
-      for (let j = 1; j < 4; j++) {
-        let currentBox = document.getElementById('box' + (i * j)).innerHTML;
-        console.log(i, j, count, currentBox)
-        if (currentBox) {
-          if (player === currentBox) {
-            count++;
+    for (let i = 0; i < y.length; i++) {
+      // console.log(x, y[i], i)
+      console.log(type)
+      if (type === 'horizontal' || type === 'vertical') {
+        if (document.getElementById('box' + (x + y[i])).innerHTML !== null) {
+          currentBox = document.getElementById('box' + (x + y[i])).innerHTML;
+          if (currentBox === player) {
+            str = str + player;
+            checkWins(type, str, x, y.slice(i + 1))
           }
-          checkWins(count);
-          count--;
+        } else {
+          return;
+        }
+      } else {
+        console.log('entered diag')
+        if (document.getElementById('box' + (x[i] + y[i])).innerHTML !== null) {
+          currentBox = document.getElementById('box' + (x[i] + y[i])).innerHTML;
+          if (currentBox === player) {
+          console.log(type, str)
+          str = str + player;
+          checkWins(type, str, x.slice(i + 1), y.slice(i + 1))
+          }
+        } else {
+          return;
         }
       }
     }
   }
-  checkWins(0);
+  for (let i = 0; i < 3; i++) {
+    checkWins('horizontal', '', offsets[i], colRowCount)
+  }
+
+  if (!won) {
+    for (let i = 0; i < 3; i++) {
+      checkWins('vertical', '', colRowCount[i], offsets)
+    }
+  }
+
+  if (!won) {
+    checkWins('majordiagonal', '', offsets, colRowCount)
+  }
+
+  if (!won) {
+    let newArray = colRowCount.reverse();
+    checkWins('minordiagonal', '', offsets, newArray);
+  }
+
+  // checkWins('vertical', '', rows, cols);
   return won;
 }
+
+
+// checkWins(str, x.slice(i + 1), y.slice(j));
+// checkWins(str, x.slice(i), y.slice(j + 1));
+// checkWins(str, x.slice(i + 1), y.slice(j + 1));
 
 //clear all moves
 document.getElementById("clear").addEventListener("click", function () {
