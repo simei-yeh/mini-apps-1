@@ -37,10 +37,12 @@ class ToggleForms extends React.Component {
         info = { creditCardNo: s.creditCardNo, expiryDate: s.expiryDate, CVV: s.CVV, billingZipCode: s.billingZipCode }
         break;
       }
+      default: {
+        this.props.nextStep(this.props.checkoutStatus);
+      }
     }
     console.log(info);
     this.props.submit(info);
-    this.props.nextStep(this.props.checkoutStatus);
   }
 
   handleInput(event) {
@@ -132,6 +134,7 @@ class App extends React.Component {
     super(props);
     this.state = ({
       checkoutStatus: '',
+      id: ''
     })
 
     this.nextButton = this.nextButton.bind(this);
@@ -144,10 +147,6 @@ class App extends React.Component {
     })
   }
 
-  retrieveUsers() {
-
-  }
-
   nextButton(status) {
     let newStatus = 'F' + (parseInt(status.slice(1)) + 1);
     if (newStatus === 'F5') {
@@ -157,11 +156,63 @@ class App extends React.Component {
     this.setState({
       checkoutStatus: newStatus,
     })
+
   }
 
   handleSubmission(submission) {
-    console.log('received items on submission', submission)
+    console.log('sending submission', submission)
+    switch(this.state.checkoutStatus) {
+      case 'F1': {
+        console.log('on case 1!')
+        axios.post('/users', {
+          submission
+        })
+        .then((response) => {
+          console.log('post received!', response.data._id);
+          this.state.id = response.data._id
+          this.nextButton(this.state.checkoutStatus);
+        })
+        .catch((err)=> {
+          alert('could not submit request!', err)
+        })
+        break;
+      }
+      case 'F2': {
+        console.log('on case 2!', this.state.id)
+        axios.put('/address', {
+          id: this.state.id,
+          submission: submission
+        })
+        .then((response) => {
+          console.log('put received!', response)
+          this.nextButton(this.state.checkoutStatus);
+        })
+        .catch((err)=> {
+          alert('could not submit request!', err)
+        })
+        break;
+      }
+      case 'F3': {
+        axios.put('/creditcard', {
+          id: this.state.id,
+          submission: submission
+        })
+        .then((response) => {
+          console.log('put received!', response)
+          this.nextButton(this.state.checkoutStatus);
+        })
+        .catch((err)=> {
+          alert('could not submit request!', err)
+        })
+        break;
+      }
+      default: {
+        console.log('nothing sent')
+      }
+    }
   }
+
+
 
   render() {
     return (
