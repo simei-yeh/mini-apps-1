@@ -4,6 +4,8 @@
 
 var firstPlayer = "X";
 var currentPlayer = firstPlayer;
+var Xwins = 0;
+var Owins = 0;
 
 //toggle Players
 var togglePlayer = function(currentPlayer) {
@@ -36,9 +38,16 @@ for (let i = 1 ; i <= 9; i++) {
   document.getElementById("box" + i).addEventListener("click", function() {
     document.getElementById("box" + i).innerHTML = currentPlayer;
     togglePlayer(currentPlayer);
+    checkWinCondition();
   })
 }
 
+//present total wins by player
+
+document.getElementById("clear").addEventListener("click", function() {
+  document.getElementById("winsCount").innerHTML =
+    "X wins  " + Xwins + " and   O wins  " + Owins;
+})
 
 
 
