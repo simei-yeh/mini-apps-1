@@ -6,6 +6,7 @@ var App = () => {
     $.ajax({
       url: server,
       method: 'POST',
+      dataType: "json",
       success: (data) => {
         console.log('post successful', data);
 
@@ -15,6 +16,11 @@ var App = () => {
       }
     })
   }
-
 }
 
+
+document.getElementById("submit").addEventListener('click', () => {
+  document.getElementById("form").submit((event) => {
+    console.log(event);
+  })
+})
