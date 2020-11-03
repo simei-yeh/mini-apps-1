@@ -24,17 +24,17 @@ class ToggleForms extends React.Component {
     event.preventDefault();
     let s = this.state;
     let info = {};
-    switch(this.props.checkoutStatus) {
+    switch (this.props.checkoutStatus) {
       case 'F1': {
-        info = {name: s.name, password: s.password, email: s.email}
+        info = { name: s.name, password: s.password, email: s.email }
         break;
       }
       case 'F2': {
-        info = {addressLine1: s.addressLine1, addressLine2: s.addressLine2, addressCity: s.addressCity, addressState: s.addressState, addressZipCode: s.addressZipCode}
+        info = { addressLine1: s.addressLine1, addressLine2: s.addressLine2, addressCity: s.addressCity, addressState: s.addressState, addressZipCode: s.addressZipCode }
         break;
       }
       case 'F3': {
-        info = {creditCardNo: s.creditCardNo, expiryDate: s.expiryDate, CVV: s.CVV, billingZipCode: s.billingZipCode}
+        info = { creditCardNo: s.creditCardNo, expiryDate: s.expiryDate, CVV: s.CVV, billingZipCode: s.billingZipCode }
         break;
       }
     }
@@ -44,7 +44,7 @@ class ToggleForms extends React.Component {
   }
 
   handleInput(event) {
-      this.setState({
+    this.setState({
       [event.target.name]: event.target.value
     })
 
@@ -52,24 +52,36 @@ class ToggleForms extends React.Component {
 
   render() {
     let text = '';
-    let [box1, box2, box3, box4, box5] = ['','','','','']
+    let s = this.state;
+    let showOrHideAll = 'hideMe';
+    let showOrHideDetails = 'hideMe';
+    let [box1, box2, box3, box4, box5] = ['', '', '', '', '']
     let [formBox4Class, formBox5Class] = ["hideMe formBox4", "hideMe formBox5"];
-     switch(this.props.checkoutStatus) {
+    switch (this.props.checkoutStatus) {
       case 'F1': {
         text = 'Please enter your login details:';
         [box1, box2, box3, box4, box5] = ['name', 'email', 'password', null, null];
+        showOrHideAll = 'showMe';
         break;
       }
       case 'F2': {
         text = 'Please enter your shipping details:';
         [box1, box2, box3, box4, box5] = ['addressLine1', 'addressLine2', 'addressCity', 'addressState', 'addressZipCode'];
         [formBox4Class, formBox5Class] = ["showMe formBox4", "showMe formBox5"];
+        showOrHideAll = 'showMe';
         break;
       }
       case 'F3': {
         text = 'Please enter your credit card details:';
         [box1, box2, box3, box4, box5] = ['creditCardNo', 'expiryDate', 'CVV', 'billingZipCode', null];
         [formBox4Class, formBox5Class] = ["showMe formBox4", "hideMe formBox5"];
+        showOrHideAll = 'showMe';
+        break;
+      }
+      case 'F4': {
+        text = 'Please confirm your purchase details:';
+        showOrHideAll = 'hideMe';
+        showOrHideDetails = 'showMe'
         break;
       }
       case 'F0':
@@ -83,34 +95,41 @@ class ToggleForms extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>{text}
-          <div  className={this.props.checkoutStatus === "F0" ? "hideMe" : "showMe"}>
-           <span className={"formBox1"}>{box1}
-           <input name={box1} value={this.state[box1]} onChange={this.handleInput}></input>
-           </span>
-           <span className="formBox2">{box2}
-           <input name={box2} value={this.state[box2]} onChange={this.handleInput}></input>
-           </span>
-           <span className="formBox3">{box3}
-           <input name={box3} value={this.state[box3]} onChange={this.handleInput}></input>
-           </span>
-           </div>
-           <span className={formBox4Class}>{box4}
-           <input name={box4} value={this.state[box4]} onChange={this.handleInput}></input>
-           </span>
-           <span className={formBox5Class}>{box5}
-           <input name={box5} value={this.state[box5]} onChange={this.handleInput}></input>
-           </span>
-           <button className="next" name={this.props.checkoutStatus}>Next Step</button>
+          <div className={showOrHideAll}>
+            <span className={"formBox1"}>{box1}
+              <input name={box1} value={this.state[box1]} onChange={this.handleInput}></input>
+            </span>
+            <span className="formBox2">{box2}
+              <input name={box2} value={this.state[box2]} onChange={this.handleInput}></input>
+            </span>
+            <span className="formBox3">{box3}
+              <input name={box3} value={this.state[box3]} onChange={this.handleInput}></input>
+            </span>
+          </div>
+          <span className={formBox4Class}>{box4}
+            <input name={box4} value={this.state[box4]} onChange={this.handleInput}></input>
+          </span>
+          <span className={formBox5Class}>{box5}
+            <input name={box5} value={this.state[box5]} onChange={this.handleInput}></input>
+          </span>
+          <span className={showOrHideDetails}>
+            <ul>
+              <li>{s.name}</li>
+              <li>{s.email}</li>
+              <li>{s.addressLine1} {s.addressLine2}, {s.addressCity}, {s.addressState}, {s.addressZipCode}</li>
+              <li>{s.creditCardNo}, {s.expiryDate}, {s.CVV}, {s.billingZipCode} </li>
+            </ul>
+          </span>
+          <button className="next" name={this.props.checkoutStatus}>Next Step</button>
         </form>
       </div>
-
     )
   }
 }
 
 class App extends React.Component {
   constructor(props) {
-    super (props);
+    super(props);
     this.state = ({
       checkoutStatus: '',
     })
@@ -120,14 +139,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.setState ({
+    this.setState({
       checkoutStatus: 'F0'
     })
   }
 
+  retrieveUsers() {
+
+  }
+
   nextButton(status) {
     let newStatus = 'F' + (parseInt(status.slice(1)) + 1);
-    if (newStatus === 'F4') {
+    if (newStatus === 'F5') {
       newStatus = 'F0';
     }
     console.log('newStatus', newStatus);
@@ -141,9 +164,9 @@ class App extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div>
-        <ToggleForms checkoutStatus={this.state.checkoutStatus} submit={this.handleSubmission} nextStep={this.nextButton}/>
+        <ToggleForms checkoutStatus={this.state.checkoutStatus} submit={this.handleSubmission} nextStep={this.nextButton} />
       </div>
     )
   }
