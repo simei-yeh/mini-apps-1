@@ -1,26 +1,26 @@
-var App = () => {
 
-  server = 'http://127.0.0.1:8080'
+//   sendToServer = (data, successCB) => {
+//     $.ajax({
+//       url: server,
+//       method: 'POST',
+//       dataType: "json",
+//       success: (data) => {
+//         console.log('post successful', data);
 
-  sendToServer = (data, successCB) => {
-    $.ajax({
-      url: server,
-      method: 'POST',
-      dataType: "json",
-      success: (data) => {
-        console.log('post successful', data);
+//       },
+//       error: (err) => {
+//         console.log('post unsuccessful', err)
+//       }
+//     })
+//   }
+// }
 
-      },
-      error: (err) => {
-        console.log('post unsuccessful', err)
-      }
-    })
-  }
+
+function logSubmit(event) {
+  console.log('click!');
+  console.log(event);
+
 }
 
 
-document.getElementById("submit").addEventListener('click', () => {
-  document.getElementById("form").submit((event) => {
-    console.log(event);
-  })
-})
+document.getElementById("form").addEventListener('submit', logSubmit)

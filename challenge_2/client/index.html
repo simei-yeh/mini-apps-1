@@ -1,17 +1,22 @@
+<!DOCTYPE html>
 <html>
+
 <head>
 
 </head>
+
 <body>
 
- Hello World! This is the client index.html
- <p></p>
+  Hello World! This is the client index.html
+  <p></p>
 
-<div>
- <label>textarea<input type="myForm" id="form"></input></label>
- <button type="submit" id="submit">Submit</button>
-</div>
+  <div>
+    <form id="form" action="/" method="post" enctype="multipart/form-data">
+      <label>Enter message:</label><textarea name="message"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 </body>
 <script src="app.js"></script>
-</html>
 
+</html>
