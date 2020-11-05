@@ -1,6 +1,8 @@
 import React from 'react'
 import GameBoard from './GameBoard.jsx'
 import moves from './gameMoves.js'
+import Board from './newBoard.js'
+
 
 class App extends React.Component {
   constructor(props) {
@@ -10,15 +12,7 @@ class App extends React.Component {
       currentPlayer: '',
       move: 0,
       won: false,
-      gameBoard: [
-      {0: [0, 0, 0, 0, 0, 0]},
-      {1: [0, 0, 0, 0, 0, 0]},
-      {2: [0, 0, 0, 0, 0, 0]},
-      {3: [0, 0, 0, 0, 0, 0]},
-      {4: [0, 0, 0, 0, 0, 0]},
-      {5: [0, 0, 0, 0, 0, 0]},
-      {6: [0, 0, 0, 0, 0, 0]}
-      ]
+      gameBoard: []
     }
 
     this.togglePlayer = this.togglePlayer.bind(this)
@@ -28,7 +22,8 @@ class App extends React.Component {
   componentDidMount() {
     this.setState ({
       firstPlayer: 'R',
-      currentPlayer: 'R'
+      currentPlayer: 'R',
+      gameBoard: Board
     })
   }
 

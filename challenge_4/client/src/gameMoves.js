@@ -41,12 +41,24 @@ checkHorizontals = (player, col, row, board) => {
   return won;
 }
 
+
 checkMajorDiagonals = (player, col, row, board) => {
+
+  if (col - row > 3 || col - row < -2) {
+    return false;
+  }
+
+  // let leftMostCol = Math.max(0, col - r);
+  // let lastColStart = Math.min(col, 3);
 
 }
 
 
 checkMinorDiagonals = (player, col, row, board) => {
+
+  if (col + row < 3 || col + row > 8) {
+    return false;
+  }
 
 }
 
