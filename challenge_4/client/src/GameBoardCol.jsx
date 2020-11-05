@@ -2,11 +2,11 @@ import React from 'react'
 import GameBoardSquare from './GameBoardSquare.jsx'
 
 
-const GameBoardCol = ({ fullCol, colCount }) => (
+const GameBoardCol = ({ fullCol, colCount, clickListener }) => (
 
 
   <td>
-    {fullCol[colCount + 1].map((box, index) => <GameBoardSquare key={index} id={colCount + '' + index} box={box} />)}
+    {fullCol[colCount].map((box, index) => <GameBoardSquare key={index} id={colCount + '' + index} box={box} clickListener={clickListener}/>)}
     <th>Col {colCount}</th>
   </td>
 

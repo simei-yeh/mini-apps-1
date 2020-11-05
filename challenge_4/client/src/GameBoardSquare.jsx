@@ -1,7 +1,12 @@
 import React from 'react'
 
-const GameBoardSquare = ({id, box}) => (
-    <tr><td>{id} {box} </td></tr>
+const GameBoardSquare = ({ id, box, clickListener }) => (
+  <tr>
+    <td onClick={() => { clickListener(id) }}
+      className={box}>
+      {box}
+    </td>
+  </tr>
 
 )
 
