@@ -8,6 +8,7 @@ app.use(express.static('client/dist'))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
+  //fix kitty
   const newKitty = new db.User(req.body.submission)
 
 })
