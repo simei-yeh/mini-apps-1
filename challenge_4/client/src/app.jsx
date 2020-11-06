@@ -17,6 +17,7 @@ class App extends React.Component {
 
     this.togglePlayer = this.togglePlayer.bind(this)
     this.clickColHandler = this.clickColHandler.bind(this)
+    this.clearGameBoard = this.clearGameBoard.bind(this)
   }
 
   componentDidMount() {
@@ -26,8 +27,6 @@ class App extends React.Component {
       gameBoard: Board
     })
   }
-
-
 
   togglePlayer (player) {
     this.state.currentPlayer = this.state.currentPlayer === 'B' ? 'R' : 'B';
@@ -66,6 +65,15 @@ class App extends React.Component {
     }
   }
 
+  clearGameBoard(event) {
+    event.preventDefault();
+    console.log('click!')
+    console.log(newBoard)
+    this.setState({
+      gameBoard: Board
+    })
+  }
+
 
 
 
@@ -73,7 +81,7 @@ class App extends React.Component {
     return (
       <div>
         Hello world! this is challenge 4
-        <button>Clear Game Board</button>
+        <button onClick={()=> this.clearGameBoard(event)}>Clear Game Board</button>
         <GameBoard board={this.state.gameBoard} clickListener={this.clickColHandler} />
       </div>
     )
