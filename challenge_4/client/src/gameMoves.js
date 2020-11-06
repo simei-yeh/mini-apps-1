@@ -127,12 +127,7 @@ checkMinorDiagonals = (player, col, row, board) => {
     lastStartRow = row + (col - lastStartCol);
   }
 
-
-  console.log('first starting column row', rightMostCol, rightMostRow)
-  console.log('last starting column row', lastStartCol, lastStartRow)
-
   for (let i = rightMostCol; i >= lastStartCol; i--) {
-    console.log('calling diagonals', rightMostCol, lastStartCol)
     if (minorDiagonalsHelper(player, i, rightMostRow, board)) {
       return true;
     } else {

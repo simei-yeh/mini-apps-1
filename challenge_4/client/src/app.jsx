@@ -2,6 +2,7 @@ import React from 'react'
 import GameBoard from './GameBoard.jsx'
 import moves from './gameMoves.js'
 import Board from './newBoard.js'
+import axios from 'axios'
 
 
 class App extends React.Component {
@@ -68,13 +69,18 @@ class App extends React.Component {
   clearGameBoard(event) {
     event.preventDefault();
     console.log('click!')
-    console.log(newBoard)
+
     this.setState({
       gameBoard: Board
     })
+
+    axios.post('/', {
+      winner: this.state.currentPlayer
+    })
+    .then((response) => {
+      console.log(response)
+    })
   }
-
-
 
 
   render() {

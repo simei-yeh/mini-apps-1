@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
     "html": "^1.0.0",
     "jsx": "^0.9.89",
     "mongoose": "^5.10.11",

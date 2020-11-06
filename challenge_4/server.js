@@ -9,12 +9,12 @@ app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
   //fix kitty
-  const newKitty = new db.User(req.body.submission)
 
 })
 
 app.post('/', (req, res) => {
-  res.send('Hello World! this is server side')
+  console.log(req.body)
+  res.status(201).send('Hello World! this is server side')
 })
 
 
